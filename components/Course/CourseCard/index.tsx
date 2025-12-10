@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
-interface CourseCardProps {
+export interface CourseCardProps {
   title: string;
   description: string;
 }

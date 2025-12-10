@@ -9,6 +9,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { CourseModules } from "../CoruseModules";
+import { courses } from "@/components/Course/CourseCard/utils";
 
 export default function CoursePage() {
   const searchParams = useSearchParams();
@@ -17,9 +19,16 @@ export default function CoursePage() {
   if (!courseTitle) {
     return <div>Curso não encontrado</div>;
   }
+  
+  const course = courses?.find((c) => c.title === courseTitle);
+
+  if (!course) {
+    return <div>Curso não encontrado</div>;
+  }
 
   return (
-    <div>
+    <div className="min-h-screen">
+      <div className="bg-white border-b px-6 py-4">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -27,16 +36,12 @@ export default function CoursePage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href="/components">Components</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
             <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-
-      <h1 className="text-3xl font-bold mb-4">{courseTitle}</h1>
+      </div>
+      <CourseModules {...course} />
     </div>
   );
 }
