@@ -1,26 +1,68 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { CoursesInfo } from "../CourseCard";
+import { PanelLeft, PanelRight } from "lucide-react";
 import { useState } from "react";
 
-export function CourseSidebar({ courseModules }: CoursesInfo) {
-    const [activeModule, setActiveModule] = useState<number>(1);
+const courseModuleData = [
+  {
+    title: "Introduction to Course",
+    description: "Learn the basics of the course.",
+  },
+  {
+    title: "Advanced Topics",
+    description: "Dive deeper into advanced subjects.",
+  },
+  {
+    title: "Practical Applications",
+    description: "Apply what you've learned in real-world scenarios.",
+  },
+  {
+    title: "Final Project",
+    description: "Showcase your knowledge with a final project.",
+  },
+];
+
+export function CourseSidebar() {
+  const [activeModule, setActiveModule] = useState<number>(1);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
-    <aside className="w-64 border bg-white h-full sticky top-0 flex flex-col">
-      <aside className="w-64 border-l bg-white h-screen sticky top-0 flex flex-col">
-        <div className="p-4 space-y-2">
-          {courseModules?.map((module, index) => (
-            <Button
-              key={module.title}
-              variant={activeModule === index ? "default" : "outline"}
-              className="w-full justify-start text-left"
-              onClick={() => setActiveModule(index)}
-            >
-              {module.title}
-            </Button>
-          ))}
-        </div>
-      </aside>
-    </aside>
+    <>
+      {isSidebarOpen ? (
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="ml-auto"
+        >
+          <PanelRight className="h-5 w-5" />
+        </Button>
+      ) : null}
+
+      {!isSidebarOpen ? (
+        <aside className="w-64 border-l bg-gray-50">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="ml-auto"
+          >
+            <PanelLeft className="h-5 w-5" />
+          </Button>
+          <div className="p-4 space-y-2">
+            {courseModuleData?.map((module, index) => (
+              <Button
+                key={module.title}
+                variant={activeModule === index ? "default" : "outline"}
+                className="w-full justify-start text-left"
+                onClick={() => setActiveModule(index)}
+              >
+                {module.title}
+              </Button>
+            ))}
+          </div>
+        </aside>
+      ) : null}
+    </>
   );
 }
