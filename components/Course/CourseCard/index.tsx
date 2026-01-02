@@ -1,9 +1,9 @@
+"use client";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardTitle,
+  CardDescription, CardTitle
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -12,25 +12,29 @@ import Link from "next/link";
 export interface CourseCardProps {
   title: string;
   description: string;
+  content?: {
+    title: string;
+    description: string;
+  }[];
 }
 
-export interface CoursesInfo extends CourseCardProps{
+export interface CoursesInfo extends CourseCardProps {
   img: string;
   badges: string[];
-  courseModules: CourseCardProps[]
+  courseModules: CourseCardProps[];
 }
 
 export function CourseCard({ badges, description, img, title }: CoursesInfo) {
   const courseSlug = title.toLowerCase().replace(/\s+/g, "-");
 
   return (
-    <Card className="w-full bg-gray-800 shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer">
+    <Card className="group w-full bg-gray-800 shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer">
       <Link href={`/courses/${courseSlug}?title=${encodeURI(title)}`}>
-        <CardContent className="p-4">
+        <CardContent className="px-4 py-1 space-y-2">
           <div className="flex gap-3">
-            <div>
+            <div className="h-24">
               <Image
-                className="w-full object-cover rounded-md shadow-md mb-4"
+                className="w-full object-cover h-full rounded-md shadow-md mb-4"
                 alt={`${title} Logo`}
                 src={img}
                 height={100}

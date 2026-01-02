@@ -1,10 +1,9 @@
-import { CoursesInfo } from "../CourseCard";
 import { CourseSidebar } from "../CourseSidebar";
 
-export function CourseModules({...props}: CoursesInfo) {
+export function CourseModules() {
 
   return (
-        <div className="flex">
+        <div className="flex h-[calc(100vh-11vh)]">
             <main className="flex-1 p-8">
                 <div className="max-w-4xl">
                     {/* Conteúdo dos módulos do curso aqui */}
@@ -20,7 +19,7 @@ export function CourseModules({...props}: CoursesInfo) {
                 </div>
                 </div>
             </main>
-            <CourseSidebar {...props} />
+            <CourseSidebar />
         </div>
   )
 }

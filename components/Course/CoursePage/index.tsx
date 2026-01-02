@@ -9,20 +9,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { CourseModules } from "../CoruseModules";
-import { courses } from "@/components/Course/CourseCard/utils";
+import { CourseModules } from "../CourseModules";
 
 export default function CoursePage() {
   const searchParams = useSearchParams();
   const courseTitle = searchParams.get("title");
 
   if (!courseTitle) {
-    return <div>Curso não encontrado</div>;
-  }
-  
-  const course = courses?.find((c) => c.title === courseTitle);
-
-  if (!course) {
     return <div>Curso não encontrado</div>;
   }
 
@@ -41,7 +34,7 @@ export default function CoursePage() {
         </BreadcrumbList>
       </Breadcrumb>
       </div>
-      <CourseModules {...course} />
+      <CourseModules />
     </div>
   );
 }
